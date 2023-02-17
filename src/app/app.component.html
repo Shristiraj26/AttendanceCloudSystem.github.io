@@ -1,0 +1,46 @@
+<ng-container *ngIf="currentURL !== '/'">
+  <nav
+    class="navbar navbar-expand-lg bg-body-tertiary bg-dark"
+    data-bs-theme="dark"
+  >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Attendance System</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ng-container *ngFor="let menuItem of menu">
+            <li class="nav-item dropdown" *ngIf="getRoleValidationStatus(menuItem)">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{menuItem.title}}
+              </a>
+              <ul class="dropdown-menu">
+                <li *ngFor = "let submenuItem of menuItem.subMenu">
+                  <a class="dropdown-item" routerLink="{{submenuItem.url}}">{{submenuItem.title}}</a>
+                </li>
+              </ul>
+            </li>
+          </ng-container>
+
+        </ul>
+        <button class="btn btn-primary" (click) = "logout()"><i class="fa fa-sign-out"></i></button>
+      </div>
+    </div>
+  </nav>
+</ng-container>
+<router-outlet></router-outlet>
